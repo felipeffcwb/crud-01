@@ -16,6 +16,10 @@ public class ClientFacade implements Utils, DocumentValidator {
 
     @Override
     public String isDocumentOk(String document) {
+        if (stringIsNullOrEmpty(document)) {
+            return DocumentMessages.MINOR_THEN_ELEVEN;
+        }
+
         if (document.matches("[0-9]+") && document.length() != 11) {
             return DocumentMessages.MINOR_THEN_ELEVEN;
         }
@@ -25,6 +29,11 @@ public class ClientFacade implements Utils, DocumentValidator {
         }
 
         return DocumentMessages.OK;
+    }
+
+    @Override
+    public boolean stringIsNullOrEmpty(String param) {
+        return null == param || param.isEmpty();
     }
 
     @Override

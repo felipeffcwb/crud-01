@@ -1,6 +1,7 @@
 package com.api.crud01.controllers.v1;
 
-import com.api.crud01.entities.client.Client;
+import com.api.crud01.entities.car.Car;
+import com.api.crud01.services.car.CarService;
 import com.api.crud01.services.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,16 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/client")
-public class ClientController {
+@RequestMapping(value = "/car")
+public class CarController {
     @Autowired
-    private ClientService service;
+    private CarService service;
 
     @RequestMapping(
             path = "/add",
             method = RequestMethod.POST,
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity insertNewPeople(@RequestBody Client client, @RequestHeader String type) throws Exception {
-        return new ResponseEntity(service.insertNewPeopleClient(client, type), HttpStatus.CREATED);
+    public ResponseEntity insertNewCar(@RequestBody Car car, @RequestHeader String type) throws Exception {
+        return new ResponseEntity(service.insertNewCar(car, type), HttpStatus.CREATED);
     }
 }

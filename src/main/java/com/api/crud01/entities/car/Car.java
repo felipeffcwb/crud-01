@@ -20,6 +20,15 @@ public class Car {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    public Car(String name, String mark, int doors, int motor, CarType type, Client client) {
+        this.name = name;
+        this.mark = mark;
+        this.doors = doors;
+        this.motor = motor;
+        this.type = type;
+        this.client = client;
+    }
+
     public long getId() {
         return id;
     }

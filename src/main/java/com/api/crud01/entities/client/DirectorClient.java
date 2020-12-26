@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Director {
+public class DirectorClient {
     public Client constructCompanyClient(Builder builder) {
         builder.setName(builder.getResult().getName());
         builder.setDocument(builder.getResult().getDocument());
