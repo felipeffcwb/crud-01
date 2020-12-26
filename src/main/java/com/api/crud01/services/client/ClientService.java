@@ -34,7 +34,7 @@ public class ClientService extends ClientFacade {
         Strategy strategy;
 
         try {
-            strategy = (Strategy) Class.forName(environment.getProperty("client.package.path" + type)).newInstance();
+            strategy = (Strategy) Class.forName(environment.getProperty("client.package.path") + type).newInstance();
             repository.save(strategy.saveClient(client));
         } catch (Exception e) {
             throw new Exception(ClientConsts.SOMETHING_WENT_WRONG + e.getMessage());

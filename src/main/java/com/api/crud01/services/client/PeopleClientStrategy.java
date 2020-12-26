@@ -8,7 +8,7 @@ import com.api.crud01.entities.client.DirectorClient;
 public class PeopleClientStrategy implements Strategy {
     @Override
     public Client saveClient(Client client) {
-        Builder builder = new ClientBuilder(client.getName(), client.getDocument(), client.getEmail(), client.getCars());
+        Builder builder = new ClientBuilder(client.getId(), client.getName(), client.getDocument(), client.getEmail(), client.getCars());
 
         DirectorClient directorClient = new DirectorClient();
         client = directorClient.constructPeopleClient(builder);

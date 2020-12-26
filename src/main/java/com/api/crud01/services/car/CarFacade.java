@@ -17,4 +17,8 @@ public class CarFacade implements Utils {
     public boolean carIsNull(Car car) {
         return null == car;
     }
+
+    public boolean carIdIsEmpty(long id) {
+        return 0 == id;
+    }
 }

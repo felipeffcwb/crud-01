@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientBuilder implements Builder {
+    private long id;
     private ClientType type;
     private String name;
     private String document;
@@ -16,11 +17,17 @@ public class ClientBuilder implements Builder {
     private ClientStatus status;
     private List<Car> cars = new ArrayList<>();
 
-    public ClientBuilder(String name, String document, String email, List<Car> cars) {
+    public ClientBuilder(long id, String name, String document, String email, List<Car> cars) {
+        this.id = id;
         this.name = name;
         this.document = document;
         this.email = email;
         this.cars = cars;
+    }
+
+    @Override
+    public void setClientId(long id) {
+        this.id = id;
     }
 
     @Override
@@ -55,6 +62,6 @@ public class ClientBuilder implements Builder {
 
     @Override
     public Client getResult(){
-        return new Client(name, document, email, status, type, cars);
+        return new Client(id, name, document, email, status, type, cars);
     }
 }

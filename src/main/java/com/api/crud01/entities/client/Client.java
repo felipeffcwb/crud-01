@@ -22,7 +22,8 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private List<Car> cars = new ArrayList<Car>();
 
-    public Client(String name, String document, String email, ClientStatus status, ClientType type, List<Car> cars) {
+    public Client(long id, String name, String document, String email, ClientStatus status, ClientType type, List<Car> cars) {
+        this.id = id;
         this.name = name;
         this.document = document;
         this.email = email;

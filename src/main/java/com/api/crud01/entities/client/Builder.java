@@ -7,6 +7,7 @@ import com.api.crud01.enums.ClientType;
 import java.util.List;
 
 public interface Builder {
+    void setClientId(long id);
     void setClientType(ClientType type);
     void setName(String name);
     void setDocument(String document);

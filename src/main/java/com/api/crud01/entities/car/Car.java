@@ -2,6 +2,7 @@ package com.api.crud01.entities.car;
 
 import com.api.crud01.entities.client.Client;
 import com.api.crud01.enums.CarType;
+import com.api.crud01.enums.StatesEnum;
 
 import javax.persistence.*;
 
@@ -19,14 +20,19 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
+    private StatesEnum state;
 
-    public Car(String name, String mark, int doors, int motor, CarType type, Client client) {
+    public Car() {
+    }
+
+    public Car(String name, String mark, int doors, int motor, CarType type, Client client, StatesEnum state) {
         this.name = name;
         this.mark = mark;
         this.doors = doors;
         this.motor = motor;
         this.type = type;
         this.client = client;
+        this.state = state;
     }
 
     public long getId() {
@@ -83,5 +89,13 @@ public class Car {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public StatesEnum getState() {
+        return state;
+    }
+
+    public void setState(StatesEnum state) {
+        this.state = state;
     }
 }
