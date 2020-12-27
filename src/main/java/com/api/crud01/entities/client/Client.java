@@ -3,6 +3,7 @@ package com.api.crud01.entities.client;
 import com.api.crud01.entities.car.Car;
 import com.api.crud01.enums.ClientStatus;
 import com.api.crud01.enums.ClientType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Client {
     private ClientStatus status;
     private ClientType type;
     @OneToMany(mappedBy = "client")
+    @JsonBackReference
     private List<Car> cars = new ArrayList<Car>();
 
     public Client(long id, String name, String document, String email, ClientStatus status, ClientType type, List<Car> cars) {

@@ -3,6 +3,7 @@ package com.api.crud01.entities.car;
 import com.api.crud01.entities.client.Client;
 import com.api.crud01.enums.CarType;
 import com.api.crud01.enums.StatesEnum;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -19,6 +20,7 @@ public class Car {
     private CarType type;
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @JsonManagedReference
     private Client client;
     private StatesEnum state;
 

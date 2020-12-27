@@ -5,6 +5,7 @@ import com.api.crud01.entities.client.Builder;
 import com.api.crud01.entities.client.Client;
 import com.api.crud01.entities.client.ClientBuilder;
 import com.api.crud01.entities.client.DirectorClient;
+import com.api.crud01.enums.ClientType;
 import com.api.crud01.exceptions.BadRequestException;
 import com.api.crud01.repositories.ClientRepository;
 import com.api.crud01.utils.DocumentMessages;
@@ -20,7 +21,7 @@ public class ClientService extends ClientFacade {
     @Autowired
     private Environment environment;
 
-    public Client insertNewPeopleClient(Client client, String type) throws Exception {
+    public Client insertNewClient(Client client, ClientType type) throws Exception {
         if (clientIsEmptyOrNull(client)) {
             throw new BadRequestException(ClientConsts.CLIENT_IS_EMPTY);
         }
@@ -31,10 +32,9 @@ public class ClientService extends ClientFacade {
             throw new BadRequestException(docValidator);
         }
 
-        Strategy strategy;
+        Strategy strategy = verifyClientType(type);
 
         try {
-            strategy = (Strategy) Class.forName(environment.getProperty("client.package.path") + type).newInstance();
             repository.save(strategy.saveClient(client));
         } catch (Exception e) {
             throw new Exception(ClientConsts.SOMETHING_WENT_WRONG + e.getMessage());

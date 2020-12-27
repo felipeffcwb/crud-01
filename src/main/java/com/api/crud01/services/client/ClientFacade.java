@@ -1,6 +1,7 @@
 package com.api.crud01.services.client;
 
 import com.api.crud01.entities.client.Client;
+import com.api.crud01.enums.ClientType;
 import com.api.crud01.utils.DocumentMessages;
 import com.api.crud01.utils.DocumentValidator;
 import com.api.crud01.utils.Utils;
@@ -82,5 +83,17 @@ public class ClientFacade implements Utils, DocumentValidator {
         } catch (InputMismatchException erro) {
             return (false);
         }
+    }
+
+    public Strategy verifyClientType(ClientType type) {
+        Strategy strategy;
+        switch (type) {
+            case PEOPLE:
+                strategy = new PeopleClientStrategy();
+                return strategy;
+            default:
+                break;
+        }
+        return null;
     }
 }

@@ -3,6 +3,7 @@ package com.api.crud01.services.car;
 import com.api.crud01.consts.CarConsts;
 import com.api.crud01.entities.car.Car;
 import com.api.crud01.entities.client.Client;
+import com.api.crud01.enums.CarType;
 import com.api.crud01.exceptions.NotFoundException;
 import com.api.crud01.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,9 @@ public class CarService extends CarFacade {
     @Autowired
     Environment environment;
 
-    public Car insertNewCar(Car car, String type) throws Exception {
+    public Car insertNewCar(Car car, CarType type) throws Exception {
 
-        Strategy strategy;
-
-        strategy = (Strategy) Class.forName(environment.getProperty("car.package.path") + type).newInstance();
+        Strategy strategy = verifyCarType(type);
 
         try {
             return repository.save(strategy.saveCar(car));
@@ -30,7 +29,7 @@ public class CarService extends CarFacade {
         }
     }
 
-    public Car reserveCar(long carId, String type, String to) throws Exception {
+    public Car reserveCar(long carId) throws Exception {
         if (carIdIsEmpty(carId)) {
             throw new NotFoundException(CarConsts.CAR_NOT_FOUND);
         }
@@ -38,7 +37,7 @@ public class CarService extends CarFacade {
         Car car;
 
         try {
-            car = repository.getOne(carId);
+            car = repository.findCarById(carId);
         } catch (Exception e)
         {
             throw new Exception(CarConsts.SOMETHING_WENT_WRONG + e.getMessage());
@@ -48,11 +47,11 @@ public class CarService extends CarFacade {
             throw new NotFoundException(CarConsts.CAR_NOT_FOUND);
         }
 
-        Strategy strategy;
+        Strategy strategy = verifyCarType(car.getType());
 
-        strategy = (Strategy) Class.forName(environment.getProperty("car.package.path") + type).newInstance();
 
-        strategy.next(car, to);
+
+        strategy.next(car, car.getState());
 
         return car;
     }

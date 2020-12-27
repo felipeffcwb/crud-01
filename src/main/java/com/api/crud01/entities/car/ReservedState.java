@@ -1,11 +1,10 @@
 package com.api.crud01.entities.car;
 
-import com.api.crud01.consts.CarConsts;
 import com.api.crud01.enums.StatesEnum;
 
-public class ReservedState extends State{
+public class ReservedState extends State {
 
-    ReservedState(Car car) {
+    public ReservedState(Car car) {
         super(car);
     }
 

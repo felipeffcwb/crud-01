@@ -5,7 +5,7 @@ import com.api.crud01.enums.StatesEnum;
 
 public class AvailableState extends State{
 
-    AvailableState(Car car) {
+    public AvailableState(Car car) {
         super(car);
     }
 
